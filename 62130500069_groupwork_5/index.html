@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>aespa</title>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Vue Js - HelloWorld App</title>
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+  <!-- Using via Google Web Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- https://tailwindcss.com/docs/installation -->
+  <!-- Using Tailwind via CDN -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet" />
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanalei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="app">
+
+
+
+    <div class="container d-flex justify-content-center">
+      <!-- title session -->
+      <img
+        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/083bbf10-4b8c-474e-8b2b-bc4169faf93d/de80nrf-9012ad85-fbb7-4ce1-a4ff-21381e7f6953.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMDgzYmJmMTAtNGI4Yy00NzRlLThiMmItYmM0MTY5ZmFmOTNkXC9kZTgwbnJmLTkwMTJhZDg1LWZiYjctNGNlMS1hNGZmLTIxMzgxZTdmNjk1My5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.8yN32JLreBykqv-lyZEanEJOOmnJfwlTDNQnLeE_q6E"
+        class="w-1/2">
+    </div>
+    <!-- like session -->
+    <p class="d-flex justify-content-center text-3xl tracking-widest text-blue-50 font-serif">favourite members:<span>
+        {{countliked}}</span></p>
+    <div>
+      <!-- search session -->
+      <search-photo @searched="(key)=>{this.inputkey=key}"></search-photo>
+
+    </div>
+
+    <!-- display content session -->
+    <div class="grid grid-cols-4 gap-2">
+      <div class="container d-flex justify-content-center" v-if="searching.length !== 0"
+        v-for="(member,index) in searching" :key="index">
+        <photo-list :member="member" @at-liked="toggleLike" @on-Hv="hoverimg" @un-Hv="unhover" @zoom-In="toggleImg">
+        </photo-list>
+      </div>
+      <!-- no result session -->
+      <div v-else class="mt-10  shadow-lg rounded w-full mx-auto px-auto py-5 flex justify-center">
+        <h2 class="mb-2 text-2xl font-bold text-gray-800 bg-gray-200 bg-opacity-75">no result of <span
+            class=" text-pink-600">{{inputkey}}</span> </h2>
+      </div>
+
+
+    </div>
+    <!-- pic zoom in session -->
+
+    <view-photo :eiei="viewImg" v-show="hasView" @close="()=>{this.hasView=false}"></view-photo>
+
+  </div>
+  <!-- my main.js -->
+  <script src="main.js"></script>
+  <script src="./components/PhotoItems.js"></script>
+  <script src="./components/PhotoSearch.js"></script>
+  <script src="./components/PhotoView.js"></script>
+  <script>
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
